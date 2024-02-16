@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,3 +18,31 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomePageController::class, 'index']);
+
+
+Route::get('/system-admin-login', [UserController::class, 'Login']);
+Route::post('/system-admin-login', [UserController::class, 'MakeLogin']);
+
+Route::middleware('auth.jwt')->group(function () {
+    Route::get('/system-admin', [AdminController::class, 'index']);
+    Route::get('/system-admin-logout', [UserController::class, 'logout']);
+
+
+    /*
+     * |--------------------------------------------------
+     * spatie role and permission
+     * resource routes start
+     * |--------------------------------------------------
+     */
+
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+
+
+    /*
+     * |--------------------------------------------------
+     * spatie role and permission
+     * resource routes end
+     * |--------------------------------------------------
+     */
+});

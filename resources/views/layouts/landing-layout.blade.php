@@ -1,6 +1,6 @@
 @include('components.site-ui.skeleton.head')
 @include('components.site-ui.skeleton.loader')
-@include('components.site-ui.navbar')
+@include('components.site-ui.skeleton.navbar')
 
 @yield('front-end-components')
 

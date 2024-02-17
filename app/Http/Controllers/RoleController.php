@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use function Laravel\Prompts\select;
 
 class RoleController extends Controller
 {
@@ -13,7 +17,8 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::orderBy("id", "Desc")->paginate(5);
-        return view('pages.admin.roles', compact('roles'));
+        $permissions = Permission::get();
+        return view('pages.admin.role.roles', compact('roles', 'permissions'));
     }
 
     /**
@@ -21,7 +26,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -29,7 +34,20 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            "name" => "required|string",
+            'assignedPermissions' => 'required',
+        ]);
+
+        $role = Role::create([
+            "name" => $request->input('name')
+        ]);
+        $role->syncPermissions($request->input('assignedPermissions'));
+
+        return redirect()->route('roles.index')
+            ->with('success', "Role Created!");
+
     }
 
     /**
@@ -45,7 +63,13 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $role = Role::find($id);
+        $permissions = Permission::get();
+        $assignedPermissions = DB::table('role_has_permissions')
+            ->where('role_has_permissions.role_id', $id)
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        return view('pages.admin.role.edit-role', compact('role', 'permissions', 'assignedPermissions'));
     }
 
     /**
@@ -53,7 +77,20 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $this->validate($request, [
+            'name' => 'required',
+            'assignedPermissions' => 'required',
+        ]);
+
+        $role = Role::find($id);
+        $role->name = $request->input('name');
+        $role->save();
+
+        $role->syncPermissions($request->input('assignedPermissions'));
+
+        return redirect()->route('roles.index')
+            ->with('success', 'Role updated successfully');
     }
 
     /**
@@ -61,6 +98,9 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Role::where("id", $id)->delete();
+
+        return redirect()->route('roles.index')
+            ->with('success', 'Role Deleted successfully');
     }
 }

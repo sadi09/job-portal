@@ -27,7 +27,6 @@ Route::middleware('auth.jwt')->group(function () {
     Route::get('/system-admin', [AdminController::class, 'index']);
     Route::get('/system-admin-logout', [UserController::class, 'logout']);
 
-
     /*
      * |--------------------------------------------------
      * spatie role and permission

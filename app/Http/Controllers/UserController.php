@@ -103,4 +103,9 @@ class UserController extends Controller
     {
         return redirect('/')->cookie('token','',-1);
     }
+
+    public function Info(Request $request)
+    {
+
+    }
 }

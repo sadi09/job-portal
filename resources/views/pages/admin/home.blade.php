@@ -1,6 +1,6 @@
-@extends('layouts.landing-layout')
+@extends('layouts.admin-master')
 
-@section('front-end-components')
+@section('dashboard-content')
 
     @include('components.admin.home')
 

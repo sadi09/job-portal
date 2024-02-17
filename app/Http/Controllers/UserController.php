@@ -6,7 +6,9 @@ use App\Helper\JwtToken;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -15,7 +17,13 @@ class UserController extends Controller
      */
     public function index()
     {
-
+        try {
+            $users = User::get();
+            $roles = Role::get();
+            return view('pages.admin.user.users', compact('users', 'roles'));
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -31,7 +39,34 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+//        try {
+        $request->validate([
+            'firstName' => 'string|required|max:50',
+            'lastName' => 'string|required|max:50',
+            'email' => 'string|required|email|unique:users,email',
+            'mobile' => 'string|required|unique:users,mobile',
+            'password' => 'string|required|min:4|confirmed',
+            'assignedRoles' => 'required'
+        ]);
+
+        $user = User::create([
+            'firstName' => $request->input('firstName'),
+            'lastName' => $request->input('lastName'),
+            'email' => $request->input('email'),
+            'mobile' => $request->input('mobile'),
+            'password' => Hash::make($request->input('password'))
+        ]);
+
+        $user->assignRole($request->input('assignedRoles'));
+
+        return redirect()->route('users.index')
+            ->with('success', 'User Saved Successfully');
+
+//        } catch (Exception $e) {
+//            return redirect()->route('users.index')
+//                ->with('error', $e->getMessage());
+//        }
     }
 
     /**
@@ -47,7 +82,11 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::find($id);
+        $roles = Role::pluck('name', 'name')->all();
+        $assignedRoles = $user->roles->pluck('name', 'name')->all();
+
+        return view('pages.admin.user.edit-user', compact('user', 'roles', 'assignedRoles'));
     }
 
     /**
@@ -55,7 +94,33 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $user = User::find($id);
+
+        $request->validate([
+            'firstName' => 'string|required|max:50',
+            'lastName' => 'string|required|max:50',
+//            'email' => 'string|required|email|unique:users,email', //can not change primary key
+            'mobile' => 'string|required|unique:users,mobile,' . $user->id,
+            'password' => 'string|min:4|confirmed|nullable',
+            'assignedRoles' => 'required'
+        ]);
+
+        $user->firstName = $request->input('firstName');
+        $user->lastName = $request->input('lastName');
+//        $user->email = $request->input('email'); //can not change primary key
+        $user->mobile = $request->input('mobile');
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
+
+        $user->save();
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
+        $user->assignRole($request->input('assignedRoles'));
+
+        return redirect()->route('users.index')
+            ->with('success', 'User Saved Successfully');
     }
 
     /**
@@ -63,7 +128,9 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        User::find($id)->delete();
+        return redirect()->route('users.index')
+            ->with('success','User deleted successfully');
     }
 
     public function Login()
@@ -101,7 +168,7 @@ class UserController extends Controller
 
     public function logout()
     {
-        return redirect('/')->cookie('token','',-1);
+        return redirect('/')->cookie('token', '', -1);
     }
 
     public function Info(Request $request)

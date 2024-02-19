@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CompanyInfoController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -17,7 +20,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomePageController::class, 'index']);
+Route::get('/', [HomePageController::class, 'index'])->name('home');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 
 Route::get('/system-admin-login', [UserController::class, 'Login']);
@@ -36,6 +41,8 @@ Route::middleware('auth.jwt')->group(function () {
 
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+
+    Route::get('company-info', [CompanyInfoController::class, 'index']);
 
 
     /*

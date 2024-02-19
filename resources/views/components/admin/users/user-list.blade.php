@@ -2,11 +2,14 @@
     <div class="col-lg-12 col-sm-6 wow fadeInUp flex " data-wow-delay="0.1s"
          style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
 
-
+        @can('user-create')
         <button class="btn btn-info btn-sm ml-1 float-right mb-3" data-toggle="modal" data-target="#modal-default">
             <i class="fa fa-plus-circle"></i>
             Add User
         </button>
+        @endcan
+
+
 
         <span class="cat-item rounded p-4 w-75 m-auto">
     <table class="table table-bordered">

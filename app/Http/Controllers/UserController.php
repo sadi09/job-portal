@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Helper\JwtToken;
+use App\Models\About;
+use App\Models\CompanyInfo;
+use App\Models\Slider;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -12,11 +15,18 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+//        $token = $request->cookie('token');
+//        $id = JwtToken::VerifyToken($token)->id;
+//        $user = User::find($id);
+//
+//        return ($user->getPermissionsViaRoles());
+//        die();
         try {
             $users = User::get();
             $roles = Role::get();
@@ -130,12 +140,15 @@ class UserController extends Controller
     {
         User::find($id)->delete();
         return redirect()->route('users.index')
-            ->with('success','User deleted successfully');
+            ->with('success', 'User deleted successfully');
     }
 
     public function Login()
     {
-        return view('pages.admin.auth.admin-login');
+        $company_info = CompanyInfo::get()->first();
+        $slider = Slider::get()->first();
+        $about = About::get()->first();
+        return view('pages.admin.auth.admin-login', compact('company_info'));
     }
 
     public function MakeLogin(Request $request)

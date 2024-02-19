@@ -4,16 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use App\Models\CompanyInfo;
-use App\Models\Slider;
 use Illuminate\Http\Request;
 
-class HomePageController extends Controller
+class ContactController extends Controller
 {
     function index()
     {
         $company_info = CompanyInfo::get()->first();
-        $slider = Slider::get()->first();
         $about = About::get()->first();
-        return view('pages.landing', compact('company_info', 'slider', 'about'));
+        return view('pages.contact', compact('company_info',  'about'));
     }
 }

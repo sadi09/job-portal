@@ -2,11 +2,13 @@
     <div class="col-lg-8 col-sm-6 wow fadeInUp flex " data-wow-delay="0.1s"
          style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
 
+{{--        @can('role-create')--}}
+            <button class="btn btn-info btn-sm ml-1 float-right mb-3" data-toggle="modal" data-target="#modal-default">
+                <i class="fa fa-plus-circle"></i>
+                Add Role
+            </button>
+{{--        @endcan--}}
 
-        <button class="btn btn-info btn-sm ml-1 float-right mb-3" data-toggle="modal" data-target="#modal-default">
-            <i class="fa fa-plus-circle"></i>
-            Add Role
-        </button>
 
         <span class="cat-item rounded p-4 w-75 m-auto">
     <table class="table table-bordered">
@@ -63,7 +65,8 @@
                 <td>{{$permission->name}}</td>
                 <td>
                     <a class="btn btn-info btn-xs" href="{{route('roles.edit', $role->id)}}">Add/Edit Permissions</a>
-                    <button data-id='{{$permission->id}}' class='deleteBtn btn btn-outline-danger btn-xs '>Delete</button>
+                    <button data-id='{{$permission->id}}'
+                            class='deleteBtn btn btn-outline-danger btn-xs '>Delete</button>
                 </td>
             </tr>
         @endforeach

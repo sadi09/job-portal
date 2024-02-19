@@ -140,7 +140,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" data-widget="control-sidebar" onclick="ProcessLogout()" data-slide="true" href="#" role="button">
+                <a class="{{route('system-admin-logout')}}" data-slide="true" href="#" role="button">
                     <i class="fas fa-power-off"></i>
                 </a>
             </li>

@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contacts', function (Blueprint $table) {
+        Schema::create('contact_us', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->boolean('receive_email');
-            $table->string('location_lat_long');
+            $table->string('receive_email');
+            $table->string('location_embed_link', 500);
             $table->timestamps();
         });
     }

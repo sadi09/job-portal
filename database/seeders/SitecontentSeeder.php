@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\About;
 use App\Models\CompanyInfo;
-use App\Models\Contact;
+use App\Models\Contactus;
 use App\Models\JobCategory;
 use App\Models\Slider;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -58,12 +58,12 @@ class SitecontentSeeder extends Seeder
                 <a class='btn btn-primary py-3 px-5 mt-3' href=''>Read More</a>",
         ]);
 
-        // Seed Contact
-        Contact::create([
-            'title' => 'Contact Us',
-            'content' => 'Contact us content goes here.',
-            'receive_email' => true,
-            'location_lat_long' => '40.7128,-74.0060',
+        // Seed Contactus
+        Contactus::create([
+            'title' => 'Contactus Us',
+            'content' => 'Contactus us content goes here.',
+            'receive_email' => CompanyInfo::find(1)->email,
+            'location_embed_link' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd',
         ]);
     }
 }

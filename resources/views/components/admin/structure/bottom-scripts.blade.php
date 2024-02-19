@@ -9,8 +9,22 @@
 
 <!-- AdminLTE App -->
 <script src="{{asset('admin/dist/js/adminlte.min.js')}}"></script>
+
+<script src="{{asset('admin/plugins/summernote/summernote-bs4.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 {{--<script src="{{asset('dist/js/demo.js')}}"></script>--}}
+
+<script>
+    $(function () {
+        // Summernote
+        $('#summernote').summernote()
+        // CodeMirror
+        CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+            mode: "htmlmixed",
+            theme: "monokai"
+        });
+    })
+</script>
 
 </body>
 </html>

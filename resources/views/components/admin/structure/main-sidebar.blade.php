@@ -81,12 +81,28 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/products" class="nav-link">
-                        <i class="nav-icon fas fa-list"></i>
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-cog"></i>
                         <p>
-                            Products
+                            Content Settings
+                            <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/about-settings" class="nav-link">
+                                <i class="nav-icon fas fa-info"></i>
+                                <p>About Page Content</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/contact-settings" class="nav-link">
+                                <i class="nav-icon fas fa-info"></i>
+                                <p>Contact Page Content</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
 

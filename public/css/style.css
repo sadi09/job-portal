@@ -6,6 +6,20 @@
     --dark: #2B3940;
 }
 
+
+.modal-body.login-type-modal {
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-type-modal .text-center {
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.text-center:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
 .back-to-top {
     position: fixed;
     display: none;
@@ -396,3 +410,6 @@
     opacity: 1 !important;
     visibility: visible !important;
 }
+
+
+

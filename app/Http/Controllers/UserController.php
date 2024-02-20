@@ -145,10 +145,7 @@ class UserController extends Controller
 
     public function Login()
     {
-        $company_info = CompanyInfo::get()->first();
-        $slider = Slider::get()->first();
-        $about = About::get()->first();
-        return view('pages.admin.auth.admin-login', compact('company_info'));
+        return view('pages.admin.auth.admin-login');
     }
 
     public function MakeLogin(Request $request)

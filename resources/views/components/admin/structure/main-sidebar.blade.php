@@ -73,10 +73,10 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/customers" class="nav-link">
+                    <a href="/blogs" class="nav-link">
                         <i class="nav-icon fas fa-person-booth"></i>
                         <p>
-                            Customers
+                            Blogs
                         </p>
                     </a>
                 </li>
@@ -84,7 +84,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>
-                            Content Settings
+                            Pages
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>

@@ -13,22 +13,26 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jobs</a>
                 <div class="dropdown-menu rounded-0 m-0">
-                    <a href="job-list.html" class="dropdown-item">Job List</a>
-                    <a href="job-detail.html" class="dropdown-item">Job Detail</a>
+                    <a href="{{route('job-category')}}" class="dropdown-item">Job Category</a>
+                    <a href="{{route('job-list')}}" class="dropdown-item">Job List</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                 <div class="dropdown-menu rounded-0 m-0">
-                    <a href="category.html" class="dropdown-item">Job Category</a>
+
                     <a href="testimonial.html" class="dropdown-item">Testimonial</a>
                     <a href="404.html" class="dropdown-item">404</a>
                 </div>
             </div>
             <a href="{{route('contact')}}" class="nav-item nav-link">Contact</a>
+            <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#loginModal">Login/Register</a>
+
         </div>
         <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A Job<i
                     class="fa fa-arrow-right ms-3"></i></a>
+
+
         @if($currentUser && is_object($currentUser))
             {{-- User is authenticated --}}
             <p>Welcome, {{ $currentUser->userEmail }}!</p>
@@ -41,3 +45,37 @@
     </div>
 </nav>
 <!-- Navbar End -->
+
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Select Your Role</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body login-type-modal">
+                <!-- Job Seeker logo and selection -->
+                <div class="text-center">
+                    <a href="{{route('applicant.login')}}">
+                        <i class="fa fa-3x fa-user text-primary m-2"></i>
+                        <p>Applicant</p>
+                        <button class="btn btn-primary">Select as Applicant</button>
+                    </a>
+                </div>
+
+                <!-- Employer logo and selection -->
+                <div class="text-center">
+                    <a href="{{route('employer.login')}}">
+                        <i class="fa fa-3x fa-user-tie text-primary m-2"></i>
+                        <p>Employer</p>
+                        <button class="btn btn-primary">Select as Employer</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

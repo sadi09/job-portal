@@ -15,13 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('email')->unique();
             $table->string('company_name');
-            $table->string('password');
-            $table->string('industry_type');
-            $table->string('contact_number');
+            $table->string('password')->nullable();
+            $table->foreignId('industry_type_id')->default('1')->constrained('industry_types');
+            $table->string('contact_number')->nullable();
             // Company information
             $table->string('company_logo')->nullable();
-            $table->text('company_description');
+            $table->text('company_description')->nullable();
             $table->string('company_website')->nullable();
+            $table->enum('status', ['pending', 'approved', 'suspended'])->default('pending');
             $table->timestamps();
         });
     }

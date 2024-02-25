@@ -57,7 +57,8 @@ class DatabaseSeeder extends Seeder
         $user->assignRole([$role->id]);
 
         $this->call([
-            SitecontentSeeder::class
+            SitecontentSeeder::class,
+            IndustryTypesSeeder::class
         ]);
     }
 }

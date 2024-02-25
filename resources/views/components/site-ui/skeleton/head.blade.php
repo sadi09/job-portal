@@ -36,6 +36,7 @@
 
     <!-- Template Stylesheet -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('css/login-panel-css.css')}}" rel="stylesheet">
 
     <link href="{{asset('css/toastify.min.css')}}" rel="stylesheet"/>
     <script src="{{asset('js/toastify-js.js')}}"></script>

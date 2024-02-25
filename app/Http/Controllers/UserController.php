@@ -154,7 +154,7 @@ class UserController extends Controller
 
             $request->validate([
                 'email' => 'string|required|email',
-                'password' => 'string|required'
+                'password' => 'string|required|min:4'
             ]);
 
             $user = User::where('email', '=', $request->input('email'))->first();
@@ -163,7 +163,7 @@ class UserController extends Controller
                 return response()->json(['status' => 'failed', 'message' => 'Invalid User']);
             }
 
-            $token = JwtToken::createToken($request->input('email'), $user->id);
+            $token = JwtToken::createToken($request->input('email'), $user->id, "admin");
 
             return response()->json([
                 'status' => 'success',

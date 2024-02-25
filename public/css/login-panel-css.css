@@ -1,0 +1,126 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+}
+
+.flex {
+    display: flex;
+}
+
+.sidebar {
+    width: 80px;
+    background-color: #00b074;
+    color: #fff;
+    padding-top: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.menu li {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+.menu a:hover {
+    background-color: #198754;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+
+.profile-pic {
+    margin-bottom: 20px;
+}
+
+.profile-pic img {
+    /*max-width: 100%;*/
+    /*height: auto;*/
+    /*margin-bottom: 10px;*/
+}
+
+.profile-pic form {
+    margin-top: 10px;
+}
+
+/* Credentials Section */
+.credentials {
+    margin-bottom: 20px;
+}
+
+.credentials form {
+    margin-top: 10px;
+}
+
+.credentials label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.credentials input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+/* Company Details Section */
+.company-details {
+    margin-bottom: 20px;
+}
+
+.company-details form {
+    margin-top: 10px;
+}
+
+.company-details label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.company-details input,
+.company-details textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.company-details textarea {
+    resize: vertical;
+}
+
+.company-details button {
+    padding: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.company-details button:hover {
+    background-color: #0056b3;
+}
+
+input, textarea {
+    border: 1px solid #e5e5e5;
+}

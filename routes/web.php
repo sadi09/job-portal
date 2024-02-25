@@ -8,6 +8,7 @@ use App\Http\Controllers\ContactusController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SocialiteLoginController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('common_data')->group(function (){ // this middleware is fetching common header and footer data and sharing with every view
+Route::middleware('common_data')->group(function () { // this middleware is fetching common header and footer data and sharing with every view
 
     Route::get('/', [HomePageController::class, 'index'])->name('home');
     Route::get('/about', [AboutController::class, 'index'])->name('about');
@@ -37,8 +38,25 @@ Route::middleware('common_data')->group(function (){ // this middleware is fetch
 
     Route::get('/applicant-login', [ApplicantController::class, 'Login'])->name('applicant.login');
     Route::get('/employer-login', [EmployerController::class, 'Login'])->name('employer.login');
-});
 
+
+    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+
+    /*
+        * |--------------------------------------------------
+        * socialite route start
+        * |--------------------------------------------------
+     */
+    Route::get('login/google', [SocialiteLoginController::class, 'redirectToGoogle'])->name('login.google');
+    Route::get('login/google/callback', [SocialiteLoginController::class, 'handleGoogleCallback']);
+
+    /*
+        * |--------------------------------------------------
+        * socialite route start
+        * |--------------------------------------------------
+     */
+});
 
 
 Route::middleware('auth.jwt')->group(function () {
@@ -73,4 +91,14 @@ Route::middleware('auth.jwt')->group(function () {
     Route::get('/contact-settings', [ContactusController::class, 'edit'])->name('contact-settings');
     Route::patch('/contact-settings/{id}', [ContactusController::class, 'update'])->name('contact-settings.update');
 
+});
+
+Route::middleware(['auth.employer', 'common_data'])->group(function () {
+    Route::get('/employer-profile', [EmployerController::class, 'profile'])->name('employer-profile');
+    Route::post('/update_employer_profile_picture', [EmployerController::class, 'UpdateProfilePicture'])->name('update_employer_profile_picture');
+    Route::post('/update_employer_credentials', [EmployerController::class, 'UpdateCredential'])->name('update_employer_credentials');
+    Route::post('/update_employer_details', [EmployerController::class, 'UpdateProfileDetails'])->name('update_employer_details');
+
+
+//    Route::get('/post-job', )->name('post-job');
 });

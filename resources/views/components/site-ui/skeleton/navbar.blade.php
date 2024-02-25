@@ -26,20 +26,33 @@
                 </div>
             </div>
             <a href="{{route('contact')}}" class="nav-item nav-link">Contact</a>
-            <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#loginModal">Login/Register</a>
+
+            @if (!empty($authUser))
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{$authUser->userEmail}}</a>
+                    <div class="dropdown-menu rounded-0 m-0">
+                        <a href="" class="dropdown-item">Profile</a>
+                        <a href="{{route('logout')}}" class="dropdown-item">Logout</a>
+                    </div>
+                </div>
+
+            @else
+                <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#loginModal">Login/Register</a>
+            @endif
+
 
         </div>
         <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A Job<i
-                    class="fa fa-arrow-right ms-3"></i></a>
+                class="fa fa-arrow-right ms-3"></i></a>
 
 
-        @if($currentUser && is_object($currentUser))
-            {{-- User is authenticated --}}
-            <p>Welcome, {{ $currentUser->userEmail }}!</p>
-        @else
-            {{-- User is not authenticated --}}
-            <p>Welcome, guest! Please log in.</p>
-        @endif
+{{--        @if($currentUser && is_object($currentUser))--}}
+{{--            --}}{{-- User is authenticated --}}
+{{--            <p>Welcome, {{ $currentUser->userEmail }}!</p>--}}
+{{--        @else--}}
+{{--            --}}{{-- User is not authenticated --}}
+{{--            <p>Welcome, guest! Please log in.</p>--}}
+{{--        @endif--}}
 
 
     </div>

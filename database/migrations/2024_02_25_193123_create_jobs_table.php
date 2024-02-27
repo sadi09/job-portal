@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employer_id')->constrained('employers');
+            $table->foreignId('job_categories_id')->constrained('job_categories');
             $table->string('title');
             $table->integer('vacancy')->default('1');
             $table->enum('type', ['full time', 'part time', 'contractual', 'internship']);
@@ -23,6 +24,7 @@ return new class extends Migration {
             $table->text('description');
             $table->date('published_at')->nullable();
             $table->enum('status', ['draft', 'published', 'cancelled']);
+            $table->enum('isRemote', ['0', '1'])->default(0);
 
             // Additional Fields
             $table->integer('experience_requirements')->nullable();

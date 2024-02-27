@@ -1,7 +1,7 @@
-<h1>Employer Profile</h1>
+<h3>Employer Profile - {{$employer->company_name}} <span class="btn btn-xs @if($employer->status == 'pending') btn-info @elseif($employer->status == 'approved') btn-success @elseif($employer->status == 'suspended') btn-danger @endif">{{$employer->status}}</span></h3>
 
 <div class="profile-pic cat-item rounded p-4">
-    <h2>Logo</h2>
+    <h4>Logo</h4>
     <img id="placeHolderImage" width="auto" height="150"
          src="{{ $employer->company_logo ? asset( $employer->company_logo) : asset('img/logo_placeholder.png') }}"
          alt="Company Logo">
@@ -13,7 +13,7 @@
 </div>
 
 <div class="credentials cat-item rounded p-4">
-    <h2>Email and Password</h2>
+    <h4>Email and Password</h4>
     <form method="post" action="{{ route('update_employer_credentials') }}">
         @csrf
         <label for="email">Email: [Can not change email for now]</label>
@@ -25,7 +25,7 @@
 </div>
 
 <div class="company-details cat-item rounded p-4">
-    <h2>Company Details</h2>
+    <h4>Company Details</h4>
     <form method="post" action="{{ route('update_employer_details') }}">
         @csrf
         <label for="company_name">Company Name:</label>
@@ -33,7 +33,8 @@
         <label for="industry_type">Industry Type:</label>
         <select id="industry_type" name="industry_type" class="form-control">
             @foreach($industry_types as $industry_type)
-                <option {{ $industry_type->id == $employer->industry_type_id ? 'selected' : '' }} value="{{$industry_type->id}}"> {{$industry_type->name}}</option>
+                <option
+                    {{ $industry_type->id == $employer->industry_type_id ? 'selected' : '' }} value="{{$industry_type->id}}"> {{$industry_type->name}}</option>
             @endforeach
         </select>
         <label for="contact_number">Contact Number:</label>

@@ -7,7 +7,8 @@
     <div class="sidebar">
         <ul class="menu">
 
-            <li><a href="{{route('post-job')}}">Post A Job</a></li>
+            <li><a href="{{route('jobs.create')}}">Post A Job</a></li>
+            <li><a href="{{route('jobs.index')}}">My Jobs</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="#">Contact</a></li>
             <li><a href="{{route('employer-profile')}}">Profile</a></li>

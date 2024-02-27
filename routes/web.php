@@ -7,6 +7,7 @@ use App\Http\Controllers\CompanyInfoController;
 use App\Http\Controllers\ContactusController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SocialiteLoginController;
 use App\Http\Controllers\UserController;
@@ -100,5 +101,7 @@ Route::middleware(['auth.employer', 'common_data'])->group(function () {
     Route::post('/update_employer_details', [EmployerController::class, 'UpdateProfileDetails'])->name('update_employer_details');
 
 
-//    Route::get('/post-job', )->name('post-job');
+    Route::get('/post-job', [JobController::class, 'index'])->name('post-job');
+    Route::resource('jobs', JobController::class);
+    Route::post('/post-job', [JobController::class, 'store'])->name('jobs.store');
 });

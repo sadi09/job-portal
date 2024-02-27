@@ -9,11 +9,35 @@ body {
 }
 
 .sidebar {
-    width: 80px;
+    width: max-content;
     background-color: #00b074;
     color: #fff;
     padding-top: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-row {
+    width: 100%;
+    gap: 10px;
+    display: inline-flex;
+}
+
+.float-right {
+    float: right;
+}
+
+.inline-flex {
+    display: inline-flex;
+    gap: 10px;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+
+li.list-group-item {
+    width: 100%;
 }
 
 .logo {
